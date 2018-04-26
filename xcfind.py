@@ -21,7 +21,7 @@ class FileType(Enum):
         return self.value
 
 def search(query, file_type):
-    find_command = "mdfind \"kMDItemFSName == '{0}*.{1}'c\"".format(query, file_type.extension())
+    find_command = "mdfind -name {0}.{1}".format(query, file_type.extension())
     found_paths = subprocess.check_output(find_command, shell=True).decode("utf-8").rstrip().split("\n")
     results = []
     for path in found_paths:
